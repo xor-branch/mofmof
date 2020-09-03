@@ -1,0 +1,51 @@
+<div class="container">
+  <p>
+    <span class="bold">Property Name:</span>
+    <%= @property.property_name %>
+  </p>
+  <p>
+    <span class="bold">rent:</span>
+    <%= "#{@property.rent.to_s(:delimited)} yen" %>
+  </p>
+  <p>
+    <span class="bold"> address (e.g. of a residence):</span>
+    <%= @property.address %>
+  </p>
+  <p>
+    <span class="bold"> age of construction</span>
+    <%= "#{@property.age} year (e.g. ADA)" %>
+  </p>
+  <p>
+    <span class="bold"> Note</span>
+    <%= @property.note %>
+  </p>
+</div>
+
+<% if @nearest_stations.present? %>
+  <hr>
+
+  <% @nearest_stations.each_with_index do |nearest_station, i| %>
+    <h4>
+      nearest station
+      <%= i + 1 %>
+    </h4>
+
+    <div class="container">
+      <p>
+        <span class="bold">line name</span>
+        <%= nearest_station.route_name %>
+      </p>
+      <p>
+        <span class="bold">station name</span>
+        <%= nearest_station.station_name %>
+      </p>
+      <p>
+        <span class="bold">number of steps</span>
+        <%= "#{nearest_station.time} division" %>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+
+<%= link_to 'editing', edit_property_path(@property.id) %>|
+<%= link_to 'go back', properties_path %>

@@ -1,0 +1,39 @@
+<%= form_with(model: @property, local: true) do |f| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :property_name, 'Property Name' %><br>
+  <%= f.text_field :property_name %><br>
+  <%= f.label :rent, 'rent' %><br>
+  <%= f.text_field :rent %>yen<br>
+  <%= f.label :address, 'address (e.g. of a residence)' %><br>
+  <%= f.text_field :address %><br>
+  <%= f.label :age, 'age of construction' %><br>
+  <%= f.text_field :age %>year (e.g. ADA)<br>
+  <%= f.label :note, 'Note' %><br>
+  <%= f.text_area :note %><br>
+
+  <hr>
+
+  <%= f.fields_for :nearest_stations do |nearest_station| %>
+    <h4>
+      nearest station
+      <%= nearest_station.index + 1 %>
+    </h4>
+    <%= nearest_station.label :route_name, 'line name' %><br>
+    <%= nearest_station.text_field :route_name %><br>
+    <%= nearest_station.label :station_name, 'station name' %><br>
+    <%= nearest_station.text_field :station_name %><br>
+    <%= nearest_station.label :time, 'number of steps' %><br>
+    <%= nearest_station.text_field :time %>division<br>
+  <% end %>
+
+  <%= f.submit 'Register' %><br>
+<% end %>

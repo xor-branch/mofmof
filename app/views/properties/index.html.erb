@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Property List</h1>
+  <table>
+    <tr>
+      <th>Property Name</th>
+      <th>rent</th>
+      <th>address (e.g. of a residence)</th>
+      <th>age of construction</th>
+      <th>Note</th>
+      <th colspan="3"></th>
+    </tr>
+  <% @properties.each do |property| %>
+    <tr>
+      <td><%= property.property_name %></td>
+      <td><%= "#{property.rent.to_s(:delimited)} yen" %></td>
+      <td><%= property.address %></td>
+      <td><%= "#{property.age} year (e.g. ADA)" %></td>
+      <td><%= property.note %></td>
+      <td><%= link_to 'Details', property_path(property.id) %></td>
+      <td><%= link_to 'editing', edit_property_path(property.id) %></td>
+      <td>
+        <%= link_to 'delete', property_path(property.id), method: :delete, data: { confirm: 'Are you sure you want to delete it?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  <br><br>
+  <%= link_to 'Register your property', new_property_path %>
+</div>
